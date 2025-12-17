@@ -1,6 +1,6 @@
-package cc.synkdev.synkLibs.bukkit;
+package cc.synkdev.nexusCore.bukkit;
 
-import cc.synkdev.synkLibs.components.SynkPlugin;
+import cc.synkdev.nexusCore.components.NexusPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,39 +14,15 @@ import java.io.*;
 import java.net.URL;
 
 public class Utils implements Listener {
-    private static SynkLibs score = SynkLibs.getInstance();
-    private SynkLibs core = SynkLibs.getInstance();
-    SynkPlugin spl;
-    public Utils(SynkPlugin spl) {
+    private final NexusCore core = NexusCore.getInstance();
+    NexusPlugin spl;
+    public Utils(NexusPlugin spl) {
         this.spl = spl;
     }
     public static void log(String s) {
-        Bukkit.getConsoleSender().sendMessage(score.getSpl().prefix()+" "+s);
+        Bukkit.getConsoleSender().sendMessage(NexusCore.getPl().prefix()+" "+s);
     }
 
-    public static void checkUpdate(SynkPlugin spl) {
-        try {
-            URL url = new URL("https://synkdev.cc/ver/"+spl.name());
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(url.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                if (inputLine.equals(spl.ver())) {
-                    log(ChatColor.GREEN + spl.name() + " " + Lang.translate("upToDate", score));
-                } else {
-                    log(ChatColor.GREEN + Lang.translate("updateAvailable", score) + " " + spl.name() + ": v" + inputLine);
-                    log(ChatColor.GREEN + Lang.translate("downloadHere", score) + ": "+spl.dlLink());
-                    if (SynkLibs.availableUpdates.containsKey(spl)) SynkLibs.availableUpdates.replace(spl, inputLine);
-                    else SynkLibs.availableUpdates.put(spl, inputLine);
-                }
-                break;
-            }
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public static FileConfiguration loadWebConfig(String url, File file) {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         File temp = new File(file.getParentFile(), "temp-"+System.currentTimeMillis()+".yml");
@@ -112,7 +88,7 @@ public class Utils implements Listener {
 
     @EventHandler
     public void join (PlayerJoinEvent event) {
-        if (event.getPlayer().isOp()) SynkLibs.availableUpdates.forEach((s, s2) -> {
+        if (event.getPlayer().isOp()) NexusCore.availableUpdates.forEach((s, s2) -> {
             Player p = event.getPlayer();
             p.sendMessage(core.prefix+ChatColor.GOLD+Lang.translate("updateAvailable", s) + " "+s+"!");
             p.sendMessage(core.prefix+ChatColor.GOLD+Lang.translate("downloadHere", s)+": "+s.dlLink());

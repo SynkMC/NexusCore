@@ -1,13 +1,10 @@
-package cc.synkdev.synkLibs.bukkit;
+package cc.synkdev.nexusCore.bukkit;
 
-import cc.synkdev.synkLibs.components.SynkPlugin;
+import cc.synkdev.nexusCore.components.NexusPlugin;
 import com.google.gson.Gson;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,9 +21,9 @@ public class Lang {
         }
     }
 
-    public static Map<String, String> init(SynkPlugin plugin, File langFile) {
+    public static Map<String, String> init(NexusPlugin plugin, File langFile) {
         Map<String, String> map = new HashMap<>();
-        String globLang = Bukkit.getPluginManager().getPlugin("SynkLibs").getConfig().getString("lang", "en");
+        String globLang = Bukkit.getPluginManager().getPlugin("NexusCore").getConfig().getString("lang", "en");
         if (globLang.equalsIgnoreCase("custom")) {
             if (langFile.exists()) {
                 try {
@@ -129,7 +126,7 @@ public class Lang {
             throw new RuntimeException(e);
         }
     }
-    public static String translate(String key, SynkPlugin spl, String... placeholders) {
+    public static String translate(String key, NexusPlugin spl, String... placeholders) {
         String translatedString = ChatColor.translateAlternateColorCodes('&', spl.langMap().getOrDefault(key, "Invalid translation!"));
         try {
             for (int i = 0; i < placeholders.length; i++) {

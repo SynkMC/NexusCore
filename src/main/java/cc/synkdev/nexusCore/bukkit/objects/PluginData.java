@@ -1,6 +1,5 @@
-package cc.synkdev.synkLibs.bukkit.objects;
+package cc.synkdev.nexusCore.bukkit.objects;
 
-import cc.synkdev.synkLibs.components.SynkPlugin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

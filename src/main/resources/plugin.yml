@@ -1,16 +1,16 @@
-name: SynkLibs
+name: NexusCore
 version: '${project.version}'
-main: cc.synkdev.synkLibs.bukkit.SynkLibs
+main: cc.synkdev.nexusCore.bukkit.NexusCore
 api-version: '1.13'
 authors: [ Synk ]
 permissions:
-  synklibs.report:
+  nexuscore.report:
     description: Send information dumps about your server
     default: op
-  synklibs.command.reload:
+  nexuscore.command.reload:
     description: Reload the plugin
     default: op
-  synklibs.command.support:
+  nexuscore.command.support:
     description: Use the remote support feature
     default: op
 softdepend:

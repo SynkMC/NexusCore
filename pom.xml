@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cc.synkdev</groupId>
-    <artifactId>SynkLibs</artifactId>
-    <version>1.9</version>
+    <artifactId>NexusCore</artifactId>
+    <version>1.9.1</version>
     <packaging>jar</packaging>
 
-    <name>SynkLibs</name>
+    <name>NexusCore</name>
 
     <properties>
         <java.version>8</java.version>

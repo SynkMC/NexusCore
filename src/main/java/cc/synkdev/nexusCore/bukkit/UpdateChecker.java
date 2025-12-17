@@ -1,6 +1,6 @@
-package cc.synkdev.synkLibs.bukkit;
+package cc.synkdev.nexusCore.bukkit;
 
-import cc.synkdev.synkLibs.components.PluginUpdate;
+import cc.synkdev.nexusCore.components.PluginUpdate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -34,10 +34,10 @@ public class UpdateChecker {
         }
     }
     public static List<PluginUpdate> checkOutated() {
-        SynkLibs.setSpl(SynkLibs.getInstance());
+        NexusCore.setPl(NexusCore.getInstance());
         List<Plugin> synkPlugs = new ArrayList<>();
         for (Plugin pl : Bukkit.getPluginManager().getPlugins()) {
-            if (pl.getDescription().getAuthors().contains("Synk")) {
+            if (pl.getDescription().getAuthors().contains("Synk") || pl.getDescription().getAuthors().contains("Riddles")) {
                 synkPlugs.add(pl);
             }
         }
@@ -58,7 +58,8 @@ public class UpdateChecker {
                             }
                         }
                     }
-                    if (file != null) list.add(new PluginUpdate(ver, pl.getName(), link, file));
+                    String name = pl.getName().equalsIgnoreCase("SynkLibs") ? "NexusCore" : pl.getName();
+                    if (file != null) list.add(new PluginUpdate(ver, name, link, file));
                 }
             }
         }
@@ -92,7 +93,7 @@ public class UpdateChecker {
                 throw new RuntimeException(e);
             }
         }
-        Utils.log(SynkLibs.getInstance().prefix+ ChatColor.GOLD+"New plugin versions have been downloaded! Restart your server for the changes to apply.");
+        Utils.log(NexusCore.getInstance().prefix+ ChatColor.GOLD+"New plugin versions have been downloaded! Restart your server for the changes to apply.");
     }
 
 }

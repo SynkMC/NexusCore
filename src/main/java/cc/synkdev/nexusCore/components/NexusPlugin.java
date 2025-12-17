@@ -1,8 +1,8 @@
-package cc.synkdev.synkLibs.components;
+package cc.synkdev.nexusCore.components;
 
 import java.util.Map;
 
-public interface SynkPlugin {
+public interface NexusPlugin {
     String name();
     String ver();
     String dlLink();

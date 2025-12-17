@@ -1,7 +1,7 @@
-package cc.synkdev.synkLibs.bukkit;
+package cc.synkdev.nexusCore.bukkit;
 
-import cc.synkdev.synkLibs.bukkit.objects.AnalyticsReport;
-import cc.synkdev.synkLibs.bukkit.objects.PluginData;
+import cc.synkdev.nexusCore.bukkit.objects.AnalyticsReport;
+import cc.synkdev.nexusCore.bukkit.objects.PluginData;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("unused")
 public class Analytics {
-    private static final SynkLibs core = SynkLibs.getInstance();
+    private static final NexusCore core = NexusCore.getInstance();
     public static AnalyticsReport getCurrentReport() {
         AnalyticsReport rep = core.report;
         if (rep == null) core.report = new AnalyticsReport();
@@ -23,7 +23,7 @@ public class Analytics {
         if (!pl.getDescription().getAuthors().contains("Synk")) {
             return;
         }
-        core.spls.add(pl);
+        core.pls.add(pl);
         AnalyticsReport report = getCurrentReport();
         report.getSynkPlugins().putIfAbsent(pl.getDescription().getName(), new PluginData(pl));
     }

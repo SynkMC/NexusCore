@@ -1,4 +1,4 @@
-package cc.synkdev.synkLibs.components;
+package cc.synkdev.nexusCore.components;
 
 import lombok.Getter;
 import lombok.Setter;

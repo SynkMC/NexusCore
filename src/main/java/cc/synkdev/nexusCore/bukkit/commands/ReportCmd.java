@@ -1,6 +1,6 @@
-package cc.synkdev.synkLibs.bukkit.commands;
+package cc.synkdev.nexusCore.bukkit.commands;
 
-import cc.synkdev.synkLibs.bukkit.SynkLibs;
+import cc.synkdev.nexusCore.bukkit.NexusCore;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
@@ -24,15 +24,15 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@CommandAlias("slreport|sldump|synklibsreport|synklibsdump")
+@CommandAlias("ncreport|ncdump|nexuscorereport|nexuscoredump")
 public class ReportCmd extends BaseCommand {
-    private final SynkLibs core;
-    public ReportCmd(SynkLibs core) {
+    private final NexusCore core;
+    public ReportCmd(NexusCore core) {
         this.core = core;
     }
 
     @Default
-    @CommandPermission("synklibs.report")
+    @CommandPermission("nexuscore.report")
     @Description("Send informations about your server for support")
     public void onReport(CommandSender sender) {
     String uuid = send();

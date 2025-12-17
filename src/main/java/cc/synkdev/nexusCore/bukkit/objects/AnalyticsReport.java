@@ -1,6 +1,6 @@
-package cc.synkdev.synkLibs.bukkit.objects;
+package cc.synkdev.nexusCore.bukkit.objects;
 
-import cc.synkdev.synkLibs.bukkit.SynkLibs;
+import cc.synkdev.nexusCore.bukkit.NexusCore;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Getter @Setter
 public class AnalyticsReport {
-    private SynkLibs core = SynkLibs.getInstance();
+    private NexusCore core = NexusCore.getInstance();
     UUID uuid;
     Long timestamp;
     int onlinePlayers;
@@ -39,7 +39,7 @@ public class AnalyticsReport {
         this.os = System.getProperty("os.name") + " " + System.getProperty("os.version");
         this.coreCount = Runtime.getRuntime().availableProcessors();
         this.architecture = System.getProperty("os.arch");
-        this.language = SynkLibs.lang;
+        this.language = NexusCore.lang;
         this.libsVersion = core.ver();
         this.onlineMode = Bukkit.getOnlineMode();
 
@@ -49,7 +49,7 @@ public class AnalyticsReport {
         }
 
         this.synkPlugins = new HashMap<>();
-        for (JavaPlugin pl : core.spls) {
+        for (JavaPlugin pl : core.pls) {
             synkPlugins.put(pl.getName(), new PluginData(pl));
         }
     }

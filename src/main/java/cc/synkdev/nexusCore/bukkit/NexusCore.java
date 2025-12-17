@@ -1,10 +1,10 @@
-package cc.synkdev.synkLibs.bukkit;
+package cc.synkdev.nexusCore.bukkit;
 
-import cc.synkdev.synkLibs.bukkit.commands.ReportCmd;
-import cc.synkdev.synkLibs.bukkit.commands.SlCmd;
-import cc.synkdev.synkLibs.bukkit.objects.AnalyticsReport;
-import cc.synkdev.synkLibs.components.PluginUpdate;
-import cc.synkdev.synkLibs.components.SynkPlugin;
+import cc.synkdev.nexusCore.bukkit.commands.ReportCmd;
+import cc.synkdev.nexusCore.bukkit.commands.NcCmd;
+import cc.synkdev.nexusCore.bukkit.objects.AnalyticsReport;
+import cc.synkdev.nexusCore.components.PluginUpdate;
+import cc.synkdev.nexusCore.components.NexusPlugin;
 import co.aikar.commands.BukkitCommandManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,11 +22,11 @@ import java.nio.file.Files;
 import java.util.*;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public final class SynkLibs extends JavaPlugin implements SynkPlugin {
-    @Getter private static SynkLibs instance;
-    @Setter String prefix = ChatColor.translateAlternateColorCodes('&', "&8[&6SynkLibs&8] » &r");
-    @Setter @Getter static SynkPlugin spl = null;
-    public static Map<SynkPlugin, String> availableUpdates = new HashMap<>();
+public final class NexusCore extends JavaPlugin implements NexusPlugin {
+    @Getter private static NexusCore instance;
+    @Setter String prefix = ChatColor.translateAlternateColorCodes('&', "&8[&6NexusCore&8] » &r");
+    @Setter @Getter static NexusPlugin pl = null;
+    public static Map<NexusPlugin, String> availableUpdates = new HashMap<>();
     private final File configFile = new File(getDataFolder(), "config.yml");
     public FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
     public static String lang = "en";
@@ -37,12 +37,12 @@ public final class SynkLibs extends JavaPlugin implements SynkPlugin {
     public Boolean doAutoUpdate = true;
     public UUID serverUUID;
     public AnalyticsReport report;
-    public List<JavaPlugin> spls = new ArrayList<>();
+    public List<JavaPlugin> pls = new ArrayList<>();
 
     @Override
     public void onLoad() {
         instance = this;
-        setSpl(this);
+        setPl(this);
     }
 
     @Override
@@ -55,14 +55,13 @@ public final class SynkLibs extends JavaPlugin implements SynkPlugin {
 
         BukkitCommandManager pcm = new BukkitCommandManager(this);
 
-        setSpl(this);
+        setPl(this);
         Metrics metrics = new Metrics(this, 23015);
         metrics.addCustomChart(new SimplePie("lang", () -> config.getString("lang", "en")));
         Bukkit.getPluginManager().registerEvents(new Utils(this), this);
-        Utils.checkUpdate(this);
 
         pcm.registerCommand(new ReportCmd(this));
-        pcm.registerCommand(new SlCmd(this));
+        pcm.registerCommand(new NcCmd(this));
 
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
@@ -72,12 +71,17 @@ public final class SynkLibs extends JavaPlugin implements SynkPlugin {
         }, 0L, 12000L);
         
         if (doAnalytics) {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(this, Analytics::sendReport, 0L, 5*60*20L);
+            Bukkit.getScheduler().runTaskTimerAsynchronously(this, Analytics::sendReport, 0L, 10*60*20L);
         }
     }
 
     public void loadConfig() {
         try {
+            File slFolder = new File(getDataFolder().getParentFile(), "SynkLibs");
+            if (slFolder.exists()) {
+                slFolder.renameTo(getDataFolder());
+            }
+
             if (!configFile.getParentFile().exists()) configFile.getParentFile().mkdirs();
             if (!configFile.exists()) {
                 configFile.createNewFile();
@@ -127,17 +131,17 @@ public final class SynkLibs extends JavaPlugin implements SynkPlugin {
 
     @Override
     public String name() {
-        return "SynkLibs";
+        return "NexusCore";
     }
 
     @Override
     public String ver() {
-        return "1.9";
+        return "1.9.1";
     }
 
     @Override
     public String dlLink() {
-        return "https://modrinth.com/plugin/synklibs";
+        return "https://modrinth.com/plugin/nexuscore";
     }
 
     @Override
@@ -147,7 +151,7 @@ public final class SynkLibs extends JavaPlugin implements SynkPlugin {
 
     @Override
     public String lang() {
-        return "https://synkdev.cc/storage/translations/lang-pld/SynkLibs/lang-libs.json";
+        return "https://synkdev.cc/storage/translations/lang-pld/NexusCore/lang-core.json";
     }
 
     @Override

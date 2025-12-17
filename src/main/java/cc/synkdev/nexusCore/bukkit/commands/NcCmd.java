@@ -1,9 +1,8 @@
-package cc.synkdev.synkLibs.bukkit.commands;
+package cc.synkdev.nexusCore.bukkit.commands;
 
 
-import cc.synkdev.synkLibs.bukkit.Analytics;
-import cc.synkdev.synkLibs.bukkit.Lang;
-import cc.synkdev.synkLibs.bukkit.SynkLibs;
+import cc.synkdev.nexusCore.bukkit.Lang;
+import cc.synkdev.nexusCore.bukkit.NexusCore;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
@@ -11,23 +10,21 @@ import co.aikar.commands.annotation.Subcommand;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.Map;
 
-@CommandAlias("sl|synklibs")
-public class SlCmd extends BaseCommand {
-    private final SynkLibs core;
-    public SlCmd(SynkLibs core) {
+@CommandAlias("nc|nexuscore")
+public class NcCmd extends BaseCommand {
+    private final NexusCore core;
+    public NcCmd(NexusCore core) {
         this.core = core;
     }
 
     @Subcommand("reload")
-    @CommandPermission("synklibs.command.reload")
+    @CommandPermission("nexuscore.command.reload")
     public void onReload(CommandSender sender) {
         core.loadConfig();
         sender.sendMessage(core.prefix()+ ChatColor.GREEN+ Lang.translate("reloaded", core));
@@ -45,7 +42,7 @@ public class SlCmd extends BaseCommand {
     }
 
     @Subcommand("support")
-    @CommandPermission("synklibs.command.support")
+    @CommandPermission("nexuscore.command.support")
     public void onSupport(CommandSender sender) {
         TextComponent comp = new TextComponent(core.prefix()+Lang.translate("supportLink", core));
         TextComponent link = new TextComponent(ChatColor.GREEN+" https://discord.gg/KxPE2bK5Bu");
@@ -54,7 +51,7 @@ public class SlCmd extends BaseCommand {
     }
 
     @Subcommand("support start")
-    @CommandPermission("synklibs.command.support")
+    @CommandPermission("nexuscore.command.support")
     public void onSupportStart(CommandSender sender, String[] args) {
         if (args.length == 0) {
             sender.sendMessage(core.prefix()+Lang.translate("missingArgs", core, "/support start <support id>"));
@@ -114,7 +111,7 @@ public class SlCmd extends BaseCommand {
     }
 
     @Subcommand("support end")
-    @CommandPermission("synklibs.command.support")
+    @CommandPermission("nexuscore.command.support")
     public void onSupportEnd(CommandSender sender) throws IOException {
         File codeFile = new File(core.getDataFolder(), "support_code");
         if (!codeFile.exists()) {
