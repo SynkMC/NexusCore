@@ -104,6 +104,12 @@ public class AnalyticsReport {
                 cmds.put(oo);
             }
             o.put("commands", cmds);
+
+            JSONObject fields = new JSONObject();
+            for (Map.Entry<String, Object> mapEntry : entry.getValue().getFields().entrySet()) {
+                fields.put(mapEntry.getKey(), mapEntry.getValue());
+            }
+            o.put("fields", fields);
             spls.put(o);
         }
         obj.put("synk_plugins", spls);

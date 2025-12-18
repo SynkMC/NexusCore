@@ -13,9 +13,11 @@ public class PluginData {
     private String name;
     private String version;
     private Map<String, Integer> commandUses;
+    private Map<String, Object> fields;
     public PluginData(JavaPlugin plugin) {
         this.name = plugin.getDescription().getName();
         this.version = plugin.getDescription().getVersion();
         this.commandUses = new HashMap<>();
+        this.fields = new HashMap<>();
     }
 }

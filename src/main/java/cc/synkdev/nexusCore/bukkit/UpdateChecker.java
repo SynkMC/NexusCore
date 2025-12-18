@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateChecker {
+    private static final NexusCore core = NexusCore.getInstance();
     public static JSONObject readData() {
         try {
             URL url = new URL("https://synkdev.cc/storage/versions.json");
@@ -36,9 +37,11 @@ public class UpdateChecker {
     public static List<PluginUpdate> checkOutated() {
         NexusCore.setPl(NexusCore.getInstance());
         List<Plugin> synkPlugs = new ArrayList<>();
+        core.getPlugins().clear();
         for (Plugin pl : Bukkit.getPluginManager().getPlugins()) {
             if (pl.getDescription().getAuthors().contains("Synk") || pl.getDescription().getAuthors().contains("Riddles")) {
                 synkPlugs.add(pl);
+                core.getPlugins().add(pl.getDescription().getName());
             }
         }
 

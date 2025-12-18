@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Lang {
+    private static final NexusCore core = NexusCore.getInstance();
     public static String getToken() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("https://synkdev.cc/storage/token-crowdin.php").openStream()));
@@ -20,11 +21,14 @@ public class Lang {
             throw new RuntimeException(e);
         }
     }
-
     public static Map<String, String> init(NexusPlugin plugin, File langFile) {
-        Map<String, String> map = new HashMap<>();
         String globLang = Bukkit.getPluginManager().getPlugin("NexusCore").getConfig().getString("lang", "en");
-        if (globLang.equalsIgnoreCase("custom")) {
+        return init(plugin, langFile, globLang);
+    }
+
+    public static Map<String, String> init(NexusPlugin plugin, File langFile, String lang) {
+        Map<String, String> map = new HashMap<>();
+        if (lang.equalsIgnoreCase("custom")) {
             if (langFile.exists()) {
                 try {
                     Map<String, String> curr = load(langFile);
@@ -72,9 +76,8 @@ public class Lang {
             }
             map.putAll(load(langFile));
         } else {
-            String lang = globLang;
-            if (!folderExists(globLang)) {
-                Utils.log(ChatColor.RED+"The language "+globLang+" doesn't exist! Visit https://synkdev.cc/storage/translations for the full list! Using english as a fallback language.");
+            if (!folderExists(lang)) {
+                Utils.log(ChatColor.RED+"The language "+lang+" doesn't exist! Visit https://synkdev.cc/storage/translations for the full list! Using english as a fallback language.");
                 lang = "en";
             }
             try {

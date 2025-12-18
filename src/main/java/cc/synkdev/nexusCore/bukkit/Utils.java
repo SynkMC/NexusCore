@@ -20,7 +20,10 @@ public class Utils implements Listener {
         this.spl = spl;
     }
     public static void log(String s) {
-        Bukkit.getConsoleSender().sendMessage(NexusCore.getPl().prefix()+" "+s);
+        Bukkit.getConsoleSender().sendMessage(NexusCore.getPl().prefix()+" "+ChatColor.translateAlternateColorCodes('&', s));
+    }
+    public static void log(String s, boolean prefix) {
+        Bukkit.getConsoleSender().sendMessage((prefix ? NexusCore.getPl().prefix() : "")+" "+ChatColor.translateAlternateColorCodes('&', s));
     }
 
     public static FileConfiguration loadWebConfig(String url, File file) {

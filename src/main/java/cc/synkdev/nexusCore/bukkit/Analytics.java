@@ -36,6 +36,14 @@ public class Analytics {
         core.report = rep;
     }
 
+    public static void addCustomField(JavaPlugin pl, String field, Object value) {
+        AnalyticsReport rep = getCurrentReport();
+        PluginData data = rep.getSynkPlugins().get(pl.getDescription().getName());
+        data.getFields().put(field, value);
+        rep.getSynkPlugins().replace(pl.getDescription().getName(), data);
+        core.report = rep;
+    }
+
 
     public static void sendReport() {
         AnalyticsReport rep = getCurrentReport();
