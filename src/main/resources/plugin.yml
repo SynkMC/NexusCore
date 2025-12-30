@@ -3,6 +3,7 @@ version: '${project.version}'
 main: cc.synkdev.nexusCore.bukkit.NexusCore
 api-version: '1.13'
 authors: [ Synk ]
+folia-supported: true
 permissions:
   nexuscore.report:
     description: Send information dumps about your server

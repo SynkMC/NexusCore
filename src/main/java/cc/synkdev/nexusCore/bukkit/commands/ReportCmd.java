@@ -1,6 +1,7 @@
 package cc.synkdev.nexusCore.bukkit.commands;
 
 import cc.synkdev.nexusCore.bukkit.NexusCore;
+import cc.synkdev.nexusCore.components.folia.Platform;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
@@ -90,7 +91,7 @@ public class ReportCmd extends BaseCommand {
     private String getJsonString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("serverVersion", Bukkit.getServer().getVersion());
-        jsonObject.put("serverSoftware", Bukkit.getServer().getBukkitVersion());
+        jsonObject.put("serverSoftware", Platform.isFolia() ? "Folia" : Bukkit.getServer().getBukkitVersion());
         jsonObject.put("operatingSystem", System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch"));
         jsonObject.put("javaVersion", System.getProperty("java.version")+" "+ System.getProperty("java.vendor")+" "+System.getProperty("java.vm.name"));
 

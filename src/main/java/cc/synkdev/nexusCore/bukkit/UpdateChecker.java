@@ -41,6 +41,7 @@ public class UpdateChecker {
         for (Plugin pl : Bukkit.getPluginManager().getPlugins()) {
             if (pl.getDescription().getAuthors().contains("Synk") || pl.getDescription().getAuthors().contains("Riddles")) {
                 synkPlugs.add(pl);
+                if (!core.versions.containsKey(pl.getName())) core.versions.put(pl.getName(), pl.getDescription().getVersion());
                 core.getPlugins().add(pl.getDescription().getName());
             }
         }
@@ -51,7 +52,7 @@ public class UpdateChecker {
             if (obj.has(pl.getName())) {
                 JSONObject plObj = obj.getJSONObject(pl.getName());
                 String ver = plObj.getString("version");
-                if (!pl.getDescription().getVersion().equals(ver)) {
+                if (!core.versions.getOrDefault(pl.getName(), pl.getDescription().getVersion()).equals(ver)) {
                     String link = plObj.getString("link");
                     File file = null;
                     for (File lF : pl.getDataFolder().getParentFile().listFiles()) {
@@ -86,6 +87,7 @@ public class UpdateChecker {
                             out.write(buffer, 0, read);
                         }
                         out.flush();
+                        core.versions.put(pl.getPlugin(), pl.getNum());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -96,7 +98,7 @@ public class UpdateChecker {
                 throw new RuntimeException(e);
             }
         }
-        Utils.log(NexusCore.getInstance().prefix+ ChatColor.GOLD+"New plugin versions have been downloaded! Restart your server for the changes to apply.");
+        Utils.log(ChatColor.GOLD+"New plugin versions have been downloaded! Restart your server for the changes to apply.");
     }
 
 }
