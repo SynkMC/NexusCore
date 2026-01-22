@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cc.synkdev.nexusCore</groupId>
+    <artifactId>NexusCore</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- If you really want Java 25, you MUST have JDK 25 installed.
+             If you only have JDK 21 installed, change this to 21. -->
+        <maven.compiler.release>25</maven.compiler.release>
+
+        <!-- Must be provided (or set a default). Example:
+             -Dhytale.home="C:\Users\You\AppData\Roaming\Hytale" -->
+        <hytale.home>C:\Users\Clement M\AppData\Roaming\Hytale</hytale.home>
+
+        <!-- Matches your gradle.properties -->
+        <patchline>release</patchline>
+    </properties>
+
+    <dependencies>
+        <!-- Add HytaleServer.jar to compile classpath -->
+        <dependency>
+            <groupId>com.hypixel</groupId>
+            <artifactId>hytale-server</artifactId>
+            <version>local</version>
+            <scope>system</scope>
+            <systemPath>
+                ${hytale.home}/install/${patchline}/package/game/latest/Server/HytaleServer.jar
+            </systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
