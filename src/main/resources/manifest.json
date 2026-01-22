@@ -1,0 +1,22 @@
+{
+    "Group": "cc.synkdev.nexusCore",
+    "Name": "NexusCore",
+    "Version": "1.0.0",
+    "Description": "Library required to use Nexus Development Studio plugins",
+    "Authors": [
+        {
+            "Name": "Synk"
+        }
+    ],
+    "Website": "synkdev.cc",
+    "ServerVersion": "*",
+    "Dependencies": {
+        
+    },
+    "OptionalDependencies": {
+        
+    },
+    "DisabledByDefault": false,
+    "Main": "cc.synkdev.nexusCore.NexusCore",
+    "IncludesAssetPack": true
+}
