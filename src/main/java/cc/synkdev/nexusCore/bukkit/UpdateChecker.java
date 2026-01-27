@@ -54,6 +54,7 @@ public class UpdateChecker {
                 String ver = plObj.getString("version");
                 if (!core.versions.getOrDefault(pl.getName(), pl.getDescription().getVersion()).equals(ver)) {
                     String link = plObj.getString("link");
+                    link = link.isEmpty() ? null : link;
                     File file = null;
                     for (File lF : pl.getDataFolder().getParentFile().listFiles()) {
                         if (file == null) {
@@ -73,6 +74,7 @@ public class UpdateChecker {
         for (PluginUpdate pl : list) {
             try {
                 pl.getCurrent().delete();
+                if (pl.getDl() == null) continue;
                 URL url = new URL(pl.getDl());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

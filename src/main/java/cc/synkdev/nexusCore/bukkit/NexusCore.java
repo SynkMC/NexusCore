@@ -77,9 +77,9 @@ public final class NexusCore extends JavaPlugin implements NexusPlugin {
                 if (!outdated.isEmpty() && doAutoUpdate) UpdateChecker.update(outdated);
             }, 1L, 60 * 60 * 20L);
 
-            if (doAnalytics) {
+            /* if (doAnalytics) {
                 Scheduler.runRepeating(this, Analytics::sendReport, 1L, 10 * 60 * 20L);
-            }
+            }*/
 
             Scheduler.runTaskLater(this, () -> {
                 Utils.log("&b──────────────────────────────────────────────────&r", false);
@@ -105,9 +105,9 @@ public final class NexusCore extends JavaPlugin implements NexusPlugin {
                 if (!outdated.isEmpty() && doAutoUpdate) UpdateChecker.update(outdated);
             }, 0L, 60 * 60 * 20L);
 
-            if (doAnalytics) {
+            /* if (doAnalytics) {
                 Bukkit.getScheduler().runTaskTimerAsynchronously(this, Analytics::sendReport, 0L, 10 * 60 * 20L);
-            }
+            }*/
 
 
             Bukkit.getScheduler().runTaskLater(this, () -> {
@@ -193,7 +193,7 @@ public final class NexusCore extends JavaPlugin implements NexusPlugin {
 
     @Override
     public String ver() {
-        return "1.11";
+        return "1.11.1";
     }
 
     @Override
